@@ -28,7 +28,7 @@ try
 
     var ponto = pontoGeral;
     var split = ponto.Split(".");
-    var arquivoNovo = split[0] + "_" + DateTime.Now.AddDays(1).Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year + "." + split[1];
+    var arquivoNovo = split[0] + "_" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year + "." + split[1];
 
     Console.WriteLine("Copiando arquivo...");
     File.Copy(pontoGeral, arquivoNovo);
