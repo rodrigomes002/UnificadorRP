@@ -1,17 +1,18 @@
 ﻿using System.Configuration;
 
 try
-{   
+{
     var arquivosAntigos = ConfigurationManager.AppSettings.Get("arquivos_antigos");
     var pontoGeral = ConfigurationManager.AppSettings.Get("ponto_geral");
-    var deletar = ConfigurationManager.AppSettings.Get("deletar_arquivos_antigos");
+    var horarioGeracaoArquivo = ConfigurationManager.AppSettings.Get("horario_geracao_arquivo");
 
-    if (String.IsNullOrEmpty(arquivosAntigos) )
+    if (String.IsNullOrEmpty(arquivosAntigos))
         throw new Exception("Informe o diretório em arquivos_antigos no UnificadorRP.dll.config");
     if (String.IsNullOrEmpty(pontoGeral))
         throw new Exception("Informe o diretório em ponto_geral no UnificadorRP.dll.config");
-    if (String.IsNullOrEmpty(deletar))
-        throw new Exception("Digite S para sim ou N para não no UnificadorRP.dll.config, se pretende deletar os arquivos do diretório de arquivos_antigos");
+    if (String.IsNullOrEmpty(horarioGeracaoArquivo))
+        throw new Exception("Informe o horário que o arquivo vai ser gerado no UnificadorRP.dll.config");
+
 
     var diretorio = new DirectoryInfo(arquivosAntigos);
     var arquivos = diretorio.GetFiles("*.txt");
@@ -19,11 +20,6 @@ try
     if (arquivos.Count() == 0)
         throw new Exception("Não existem arquivos no diretório: " + arquivosAntigos);
 
-    Console.WriteLine($"Limpando arquivo {pontoGeral}");
-    string pontoGeralConteudoNovo = File.ReadAllText(pontoGeral);
-    var swNovo = new StreamWriter(pontoGeral);
-    swNovo.Write("");
-    swNovo.Close();
 
     foreach (var arquivo in arquivos)
     {
@@ -36,19 +32,30 @@ try
         sw.Write(text);
         sw.Close();
 
-        if (deletar == "S")
-        {
-            Console.WriteLine($"Deletando arquivo {arquivo.FullName}");
-            arquivo.Delete();
-        }
+        Console.WriteLine($"Deletando arquivo {arquivo.FullName}");
+        arquivo.Delete();
+
     }
 
-    var ponto = pontoGeral;
-    var split = ponto.Split(".");
-    var arquivoNovo = split[0] + "_" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year + "." + split[1];
+    var agora = TimeSpan.Parse(DateTime.Now.ToShortTimeString());
+    var fimDoDia = TimeSpan.Parse(horarioGeracaoArquivo);
 
-    Console.WriteLine($"Gerando arquivo {arquivoNovo}");
-    File.Copy(pontoGeral, arquivoNovo);
+    if (agora >= fimDoDia)
+    {
+        var ponto = pontoGeral;
+        var split = ponto.Split(".");
+        var arquivoNovo = split[0] + "_" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year + "." + split[1];
+
+        Console.WriteLine($"Gerando arquivo {arquivoNovo}");
+        File.Copy(pontoGeral, arquivoNovo);
+
+        Console.WriteLine($"Limpando arquivo {pontoGeral}");
+        string pontoGeralConteudoNovo = File.ReadAllText(pontoGeral);
+        var swNovo = new StreamWriter(pontoGeral);
+        swNovo.Write("");
+        swNovo.Close();
+
+    }
 
     Console.WriteLine("Fim...");
 
