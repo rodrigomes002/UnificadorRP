@@ -57,5 +57,6 @@ try
 catch (Exception e)
 {
     Console.WriteLine(e.Message);
+    await Task.Delay(5000);
 }
 
