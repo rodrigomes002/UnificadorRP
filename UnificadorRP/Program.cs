@@ -8,6 +8,12 @@ try
     if (String.IsNullOrEmpty(arquivosAntigos) || String.IsNullOrEmpty(pontoGeral))
         throw new Exception("Falta preencher o diretório");
 
+    Console.WriteLine($"Limpando arquivo {pontoGeral}");
+    string pontoGeralConteudoNovo = File.ReadAllText(pontoGeral);
+    var swNovo = new StreamWriter(pontoGeral);
+    swNovo.Write("");
+    swNovo.Close();
+
     var diretorio = new DirectoryInfo(arquivosAntigos);
     var arquivos = diretorio.GetFiles("*.txt");
 
@@ -16,11 +22,11 @@ try
 
     foreach (var arquivo in arquivos)
     {
-        Console.WriteLine("Lendo arquivos...");
+        Console.WriteLine($"Lendo arquivo {arquivo.FullName}");
         string pontoGeralConteudo = File.ReadAllText(pontoGeral);
         string text = File.ReadAllText(arquivo.FullName);
         var sw = new StreamWriter(pontoGeral);
-        Console.WriteLine("Concatenando arquivos...");
+        Console.WriteLine("Concatenando...");
         sw.WriteLine(pontoGeralConteudo);
         sw.Write(text);
         sw.Close();
@@ -30,15 +36,8 @@ try
     var split = ponto.Split(".");
     var arquivoNovo = split[0] + "_" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year + "." + split[1];
 
-    Console.WriteLine("Copiando arquivo...");
+    Console.WriteLine($"Gerando arquivo {arquivoNovo}");
     File.Copy(pontoGeral, arquivoNovo);
-
-    string pontoGeralConteudoNovo = File.ReadAllText(pontoGeral);
-    var swNovo = new StreamWriter(pontoGeral);
-    Console.WriteLine("Concatenando arquivos...");
-    swNovo.Write("");
-    swNovo.Close();
-
     Console.WriteLine("Fim...");
 
     await Task.Delay(5000);
