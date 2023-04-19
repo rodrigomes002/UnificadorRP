@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnificadorRP", "UnificadorRP\UnificadorRP.csproj", "{06C826E2-FEBC-4D7D-81E8-B26C63E21D8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnificadorDeArquivos", "UnificadorDeArquivos\UnificadorDeArquivos.csproj", "{EEF8510B-0430-4A33-94E0-726B5BEA361B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{06C826E2-FEBC-4D7D-81E8-B26C63E21D8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06C826E2-FEBC-4D7D-81E8-B26C63E21D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06C826E2-FEBC-4D7D-81E8-B26C63E21D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06C826E2-FEBC-4D7D-81E8-B26C63E21D8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEF8510B-0430-4A33-94E0-726B5BEA361B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEF8510B-0430-4A33-94E0-726B5BEA361B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEF8510B-0430-4A33-94E0-726B5BEA361B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEF8510B-0430-4A33-94E0-726B5BEA361B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
